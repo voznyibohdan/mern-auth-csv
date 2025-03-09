@@ -1,0 +1,11 @@
+username,email,balance,referralsCount,createdAt
+john_doe,john.doe@example.com,1250.75,3,2024-01-15T10:30:00Z
+jane_smith,jane.smith@example.com,985.50,7,2024-02-03T14:45:00Z
+robert_johnson,robert.j@example.com,2340.25,12,2023-11-27T09:15:00Z
+sarah_williams,sarah.w@example.com,750.00,2,2024-03-05T16:20:00Z
+michael_brown,m.brown@example.com,1875.60,5,2023-12-10T11:05:00Z
+emily_davis,e.davis@example.com,3215.80,9,2024-01-28T13:40:00Z
+david_miller,d.miller@example.com,625.30,0,2024-02-17T08:55:00Z
+lisa_wilson,l.wilson@example.com,1425.45,4,2023-10-30T15:30:00Z
+james_taylor,j.taylor@example.com,2750.90,8,2024-03-12T10:10:00Z
+anna_martinez,a.martinez@example.com,990.15,1,2024-01-05T12:25:00Z
