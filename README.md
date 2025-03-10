@@ -21,7 +21,7 @@ REFRESH_TOKEN_LIFETIME=7d
 Create a `.env` file in the `client` directory with the following variables:
 
 ```
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5000
 ```
 
 ## Installation & Running the Application
