@@ -8,19 +8,17 @@ function App() {
     const { isAuthenticated } = useSessionStore();
 
     return (
-        <>
-            <div className="container">
-                <Header />
+        <div className="container">
+            <Header />
 
-                <Routes>
-                    {isAuthenticated ? (
-                        <Route path="/" element={<HomePage />} />
-                    ) : (
-                        <Route path="/" element={<AuthPage />} />
-                    )}
-                </Routes>
-            </div>
-        </>
+            <Routes>
+                {isAuthenticated ? (
+                    <Route path="/" element={<HomePage />} />
+                ) : (
+                    <Route path="/" element={<AuthPage />} />
+                )}
+            </Routes>
+        </div>
     );
 }
 

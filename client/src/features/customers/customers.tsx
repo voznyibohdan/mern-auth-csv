@@ -30,7 +30,7 @@ export const Customers = () => {
     }
 
     return (
-        <section>
+        <div>
             <div className={css.title}>
                 <h3>Customers table</h3>
 
@@ -69,6 +69,6 @@ export const Customers = () => {
             </div>
 
             {isLoading ? 'Loading...' : null}
-        </section>
+        </div>
     );
 }
