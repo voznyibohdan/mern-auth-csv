@@ -1,0 +1,13 @@
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+.container {
+    width: min(1224px, 100vw);
+
+    padding: 0 12px;
+    margin: 0 auto;
+}

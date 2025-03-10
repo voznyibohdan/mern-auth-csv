@@ -16,7 +16,7 @@ class AuthController {
 
             const existingUser = await User.findOne({ email });
             if (existingUser) {
-                res.status(400).json({ message: 'User already exists' });
+                res.status(400).json({ success: false, message: 'User already exists' });
                 return;
             }
 
@@ -29,9 +29,9 @@ class AuthController {
             await newUser.save();
 
             res.cookie('refreshToken', refreshToken, this.rtCookiesOptions);
-            res.status(201).json({ id: newUser.id, email: newUser.email, accessToken });
+            res.status(201).json({ success: true, id: newUser.id, email: newUser.email, accessToken });
         } catch (error) {
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ success: false, message: 'Internal server error' });
         }
     }
 
@@ -41,13 +41,13 @@ class AuthController {
 
             const user = await User.findOne({ email });
             if (!user) {
-                res.status(401).json({ message: 'Invalid email or password' });
+                res.status(401).json({ success: false, message: 'Invalid email or password' });
                 return;
             }
 
             const isPasswordValid = await user.comparePassword(password);
             if (!isPasswordValid) {
-                res.status(401).json({ message: 'Invalid email or password' });
+                res.status(401).json({ success: false, message: 'Invalid email or password' });
                 return;
             }
 
@@ -57,9 +57,9 @@ class AuthController {
             await user.save();
 
             res.cookie('refreshToken', refreshToken, this.rtCookiesOptions);
-            res.status(201).json({ id: user.id, email: user.email, accessToken });
+            res.status(200).json({ success: true, id: user.id, email: user.email, accessToken });
         } catch (e) {
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ success: false, message: 'Internal server error' });
         }
     }
 
@@ -67,19 +67,19 @@ class AuthController {
         try {
             const refreshToken = req.cookies.refreshToken;
             if (!refreshToken) {
-                res.status(400).json({ message: 'Refresh token is required' });
+                res.status(400).json({ success: false, message: 'Refresh token is required' });
                 return;
             }
 
             const payload = JwtService.verifyToken(refreshToken, 'refreshToken');
             if (!payload) {
-                res.status(401).json({ message: 'Invalid or expired refresh token' });
+                res.status(401).json({ success: false, message: 'Invalid or expired refresh token' });
                 return;
             }
 
             const user = await User.findById(payload.userId);
             if (!user || user.refreshToken !== refreshToken) {
-                res.status(401).json({ message: 'Invalid refresh token' });
+                res.status(401).json({ success: false, message: 'Invalid refresh token' });
                 return;
             }
 
@@ -88,10 +88,10 @@ class AuthController {
             user.refreshToken = newRefreshToken;
             await user.save();
 
-            res.cookie('refreshToken', refreshToken, this.rtCookiesOptions);
-            res.status(200).json({ accessToken });
+            res.cookie('refreshToken', newRefreshToken, this.rtCookiesOptions);
+            res.status(200).json({ success: true, accessToken });
         } catch (e) {
-            res.status(500).json({ message: 'Internal server error' });
+            res.status(500).json({ success: false, message: 'Internal server error' });
         }
     }
 }

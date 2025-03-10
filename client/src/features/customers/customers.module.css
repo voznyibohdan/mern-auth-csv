@@ -1,0 +1,43 @@
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    margin-bottom: 36px;
+}
+
+.tableContainer {
+    overflow-x: scroll;
+}
+
+.customersTable {
+    width: 100%;
+
+    thead tr {
+        height: 48px;
+        background-color: #005cb3;
+
+        & th {
+            min-width: 200px;
+            padding-left: 12px;
+
+            color: #fff;
+            text-align: left;
+        }
+    }
+
+    tbody {
+        & tr {
+            height: 36px;
+
+            & td {
+                padding-left: 12px;
+            }
+        }
+
+        & tr:nth-child(even) {
+            background-color: #d9cccc;
+        }
+    }
+}

@@ -14,16 +14,16 @@ class CsvController {
 
         this.upload(req, res, (err) => {
             if (err) {
-                return res.status(400).json({ message: err.message });
+                return res.status(400).json({ success: false, message: err.message });
             }
 
             if (!req.file) {
-                return res.status(400).json({ message: 'Please upload a CSV file' });
+                return res.status(400).json({ success: false, message: 'Please upload a CSV file' });
             }
 
             this.processCsv(req.file.path)
-                .then(() => res.status(200).json({ message: 'Customers uploaded successfully.' }))
-                .catch((error) => res.status(500).json({ message: 'Internal server error', error }));
+                .then(() => res.status(200).json({ success: true, message: 'Customers uploaded successfully.' }))
+                .catch((error) => res.status(500).json({ success: false, message: 'Internal server error', error }));
         });
     };
 
@@ -76,12 +76,8 @@ class CsvController {
                     reject(error);
                 })
                 .on('end', () => {
-                    try {
-                        fs.unlinkSync(filePath);
-                        resolve();
-                    } catch (error) {
-                        reject(error);
-                    }
+                    fs.unlinkSync(filePath);
+                    resolve();
                 });
         });
     };

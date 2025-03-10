@@ -10,19 +10,19 @@ export async function authMiddleware (req: RequestExtended, res: Response, next:
 
         const payload = JwtService.verifyToken(token, 'accessToken');
         if (!payload) {
-            res.status(401).json({ message: 'Unauthorized' });
+            res.status(401).json({ success: false, message: 'Unauthorized' });
             return;
         }
 
         const user = await User.findOne({ _id: payload.userId });
         if (!user) {
-            res.status(401).json({ message: 'User not found' });
+            res.status(401).json({ success: false, message: 'User not found' });
             return;
         }
 
         req.user = user;
         next();
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error.' });
+        res.status(500).json({ success: false, message: 'Internal server error.' });
     }
 }

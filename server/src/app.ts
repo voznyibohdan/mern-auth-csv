@@ -17,7 +17,12 @@ class App {
 
     constructor() {
         this.app.use(helmet());
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: 'http://localhost:5173',
+            credentials: true,
+            methods: ['GET', 'POST'],
+            allowedHeaders: ['Accept', 'Content-Type', 'Authorization']
+        }));
 
         this.app.use(express.json());
         this.app.use(cookieParser());
